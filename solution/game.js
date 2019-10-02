@@ -3,9 +3,13 @@ const S_KEY = 83;
 const UP_KEY = 38;
 const DOWN_KEY = 40;
 const PADDLE_SPEED = 5;
+var score = 0;
 
 let canvas = document.getElementById("canvas"),
     context = canvas.getContext("2d");
+	
+    context.fillRect(0, 0, canvas.width, canvas.height);
+	context.fillStyle = "#FF0000";
 
 let paddle1 = new Paddle(0, canvas.height/2, 20, 100),
     paddle2 = new Paddle(canvas.width - 20, canvas.height/2, 20, 100),
@@ -22,10 +26,12 @@ let wKeyPressed = false,
  */
 function start() {
     gameLoop();
+	score = new component("30px", "Consolas", "black", 280, 40, "text");
 }
 
 function drawGame() {
-    context.clearRect(0, 0, canvas.width, canvas.height);
+	
+    context.clearRect(0, 0, canvas.width, canvas.height,'red');
     paddle1.draw(context);
     paddle2.draw(context);
     ball.draw(context);
@@ -70,6 +76,20 @@ function updateGame() {
      if(ball.x + ball.radius >= canvas.width || ball.x <= 0) {
          resetBall();
      }
+	 
+	 if(paddle1.y + paddle1.height >= canvas.height) {
+         paddle1.y = canvas.height - paddle1.height;
+     }
+	if(paddle1.y  <= 0) {
+         paddle1.y = 0;
+     }
+    if(paddle2.y + paddle1.height >= canvas.height) {
+         paddle2.y = canvas.height - paddle2.height;
+     }
+	if(paddle2.y  <= 0) {
+         paddle2.y = 0;
+     }
+   
 
      controls();
 }

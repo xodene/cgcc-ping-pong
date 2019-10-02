@@ -7,7 +7,7 @@ class Paddle {
     }
 
     draw(context) {
-        context.fillStyle = "black";
+        context.fillStyle = "blue";
         context.fillRect(this.x, this.y, this.width, this.height);
     }
 }
